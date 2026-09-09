@@ -1,0 +1,239 @@
+/* Mobile Client Specific Styles */
+:root {
+    --buzzer-red: #d32f2f;
+    --buzzer-gold: #ffcc00;
+    --buzzer-green: #28a745;
+}
+
+body.mobile-view {
+    padding: 16px;
+    background: radial-gradient(circle at center, #00125a 0%, #00001f 100%);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+}
+
+.mobile-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+/* Mobile Header */
+.mobile-header {
+    background: rgba(0, 0, 40, 0.9);
+    border: 2px solid var(--jeopardy-gold);
+    border-radius: 10px;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.mobile-team-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-team-name {
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--jeopardy-gold);
+}
+
+.mobile-score {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Registration Card on Mobile */
+.mobile-card {
+    background: rgba(0, 15, 60, 0.95);
+    border: 2px solid var(--jeopardy-gold);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+}
+
+.mobile-input {
+    background: #000a30;
+    border: 2px solid var(--jeopardy-gold);
+    color: #fff;
+    padding: 14px;
+    font-size: 18px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    outline: none;
+}
+
+.mobile-input:focus {
+    border-color: #fff;
+    box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+}
+
+/* Main Buzzer Area */
+.buzzer-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.big-buzzer-btn {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #ff4d4d, #b30000 70%, #660000 100%);
+    border: 8px solid #330000;
+    box-shadow: 0 12px 0 #440000, 0 18px 30px rgba(0,0,0,0.8);
+    color: #fff;
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0 2px 4px #000;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.big-buzzer-btn:active:not(:disabled) {
+    transform: translateY(10px);
+    box-shadow: 0 2px 0 #440000, 0 6px 15px rgba(0,0,0,0.8);
+}
+
+.big-buzzer-btn.buzz-ready {
+    background: radial-gradient(circle at 35% 35%, #ffd700, #ff9900 70%, #cc6600 100%);
+    border-color: #663300;
+    box-shadow: 0 12px 0 #663300, 0 0 35px rgba(255, 204, 0, 0.8);
+    color: #000;
+    text-shadow: none;
+    animation: buzzerPulse 1.2s infinite;
+}
+
+@keyframes buzzerPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.big-buzzer-btn:disabled {
+    opacity: 0.45;
+    filter: grayscale(80%);
+    cursor: not-allowed;
+    box-shadow: 0 6px 0 #222;
+}
+
+.buzzer-status-text {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: var(--jeopardy-gold);
+    min-height: 28px;
+}
+
+/* Category & Tile Picker Modal on Mobile (When it is this team's turn) */
+.mobile-picker-view {
+    background: rgba(0, 15, 60, 0.98);
+    border: 2px solid var(--jeopardy-gold);
+    border-radius: 12px;
+    padding: 16px;
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 75vh;
+    overflow-y: auto;
+}
+
+.mobile-picker-view.active {
+    display: flex;
+}
+
+.picker-title {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    color: var(--jeopardy-gold);
+    text-align: center;
+    font-weight: bold;
+}
+
+.mobile-tiles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.mobile-tile-choice {
+    background: var(--jeopardy-blue);
+    border: 1px solid var(--jeopardy-gold);
+    border-radius: 6px;
+    padding: 12px 8px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.mobile-tile-choice.taken {
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+.mobile-tile-choice .cat-name {
+    font-size: 12px;
+    color: #ddd;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mobile-tile-choice .val-text {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--jeopardy-gold);
+}
+
+/* Answer Submission View on Mobile */
+.mobile-answer-view {
+    background: rgba(0, 30, 80, 0.98);
+    border: 3px solid var(--jeopardy-gold);
+    border-radius: 12px;
+    padding: 20px;
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.mobile-answer-view.active {
+    display: flex;
+}
+
+.answer-timer-num {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 900;
+    color: #ff3333;
+    text-align: center;
+}

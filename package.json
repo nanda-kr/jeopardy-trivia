@@ -1,0 +1,17 @@
+{
+  "name": "jeopardy-trivia",
+  "version": "1.0.0",
+  "description": "Jeopardy-Style Trivia Web App - Real-time multiplayer with mobile buzzers, Wikipedia/IMDb scouring & rate limiting",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/test-engine.js"
+  },
+  "keywords": ["jeopardy", "trivia", "webrtc", "quiz-game", "wikipedia", "buzzer"],
+  "author": "nanda-kr",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1"
+  }
+}

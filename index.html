@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeopardy! Trivia Studio - Live Quiz Master</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>">
+    <link rel="stylesheet" href="css/jeopardy.css">
+</head>
+<body>
+
+    <!-- Header & HUD -->
+    <header class="game-header">
+        <div class="logo-area">
+            <h1 class="jeopardy-title">JEOPARDY!</h1>
+            <span class="room-badge" id="room-id-badge">Connecting...</span>
+        </div>
+
+        <div class="telemetry-hud">
+            <div class="hud-pill">
+                <span class="hud-dot" id="hud-dot"></span>
+                <span id="hud-status-text">Rate Limiter: Active</span>
+            </div>
+            <div class="hud-pill" style="border-left: 1px solid rgba(255,255,255,0.2); padding-left: 12px;">
+                <span>TPS: </span>
+                <strong id="hud-tps" style="color: var(--jeopardy-gold);">0 req/s</strong>
+            </div>
+            <button id="btn-toggle-sound" onclick="window.soundFX.toggleMute(); this.textContent = window.soundFX.isMuted ? '🔇 Muted' : '🔊 Sound';" style="background: rgba(255,255,255,0.1); border: 1px solid #444; color: #fff; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 11px;">
+                🔊 Sound
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Game Container -->
+    <main class="main-stage">
+
+        <!-- SCREEN 1: TEAM COUNT SETUP -->
+        <section class="screen active" id="screen-setup">
+            <div class="setup-card">
+                <h2>HOW MANY TEAMS?</h2>
+                <p style="color: #ccd; font-size: 16px;">Select the number of participating teams to play Jeopardy</p>
+                
+                <div class="team-stepper">
+                    <button class="step-btn" id="btn-step-down">−</button>
+                    <span class="team-count-display" id="team-count-display">3</span>
+                    <button class="step-btn" id="btn-step-up">+</button>
+                </div>
+
+                <button class="gold-btn" id="btn-confirm-teams">CONFIRM TEAMS & CREATE LOBBY</button>
+            </div>
+        </section>
+
+        <!-- SCREEN 2: TEAM REGISTRATION LOBBY (QR CODES) -->
+        <section class="screen" id="screen-lobby">
+            <div style="text-align: center; margin-bottom: 12px;">
+                <h2 style="font-family: var(--font-serif); font-size: 32px; color: var(--jeopardy-gold);">
+                    JOIN WITH MOBILE PHONES
+                </h2>
+                <p style="color: #ccd; font-size: 16px; margin-top: 6px;">
+                    Each team scans their QR code using their phone camera to enter team name & activate buzzer
+                </p>
+            </div>
+
+            <!-- QR Cards Grid -->
+            <div class="qr-grid-container" id="qr-cards-container"></div>
+
+            <div style="margin-top: 24px; display: flex; gap: 16px; justify-content: center; align-items: center;">
+                <button class="gold-btn" id="btn-proceed-categories" disabled>
+                    CHOOSE CATEGORIES →
+                </button>
+                <button id="btn-add-test-team" style="background: rgba(255,255,255,0.15); border: 1px solid #6688cc; color: #fff; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer;">
+                    + Add Demo Team (Quick Test)
+                </button>
+            </div>
+        </section>
+
+        <!-- SCREEN 3: CATEGORY SELECTION -->
+        <section class="screen" id="screen-categories">
+            <div style="text-align: center; margin-bottom: 16px;">
+                <h2 style="font-family: var(--font-serif); font-size: 32px; color: var(--jeopardy-gold);">
+                    SELECT JEOPARDY CATEGORIES
+                </h2>
+                <p style="color: #ccd; font-size: 16px; margin-top: 6px;">
+                    Choose up to 6 categories for the board. Pick "Random Mix" for surprise trivia!
+                </p>
+            </div>
+
+            <div class="category-select-grid" id="category-dropdowns-grid"></div>
+
+            <div id="generation-progress-box" style="display: none; width: 100%; max-width: 600px; margin: 16px 0; text-align: center;">
+                <div style="font-size: 14px; margin-bottom: 8px; color: var(--jeopardy-gold);" id="generation-progress-text">
+                    Scouring facts from Wikipedia with rate limiting...
+                </div>
+                <div style="width: 100%; height: 12px; background: rgba(0,0,0,0.6); border-radius: 6px; overflow: hidden; border: 1px solid var(--jeopardy-gold);">
+                    <div id="generation-progress-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #ffcc00, #28a745); transition: width 0.2s;"></div>
+                </div>
+            </div>
+
+            <button class="gold-btn" id="btn-generate-board" style="margin-top: 10px;">
+                GENERATE JEOPARDY BOARD ⚡
+            </button>
+        </section>
+
+        <!-- SCREEN 4: THE JEOPARDY BOARD -->
+        <section class="screen" id="screen-board">
+            <div class="turn-banner">
+                <div class="turn-text" id="turn-announcement-text">
+                    <span>Turn: Selecting initial team...</span>
+                </div>
+                <div style="font-size: 13px; color: #aaa;">
+                    6 Categories × 5 Questions ($100 - $500)
+                </div>
+            </div>
+
+            <!-- 6x5 Grid -->
+            <div class="jeopardy-board" id="jeopardy-board"></div>
+
+            <!-- Scoreboard Footer -->
+            <div class="scoreboard-footer" id="scoreboard-footer"></div>
+        </section>
+
+    </main>
+
+    <!-- CLUE REVEAL MODAL OVERLAY -->
+    <div class="clue-overlay" id="clue-overlay">
+        <div class="clue-card" id="clue-card">
+            <div class="clue-category-bar" id="clue-category-bar">CATEGORY</div>
+            <div class="clue-value-badge" id="clue-value-badge">$200</div>
+            
+            <div class="clue-text" id="clue-text">
+                Clue text will appear here.
+            </div>
+
+            <div class="clue-source" id="clue-source">Source: Wikipedia</div>
+
+            <div class="clue-timer-bar-container">
+                <div class="clue-timer-bar" id="clue-timer-bar"></div>
+            </div>
+
+            <div class="buzzer-status-banner" id="buzzer-status-banner">
+                🔔 BUZZERS ARE OPEN!
+            </div>
+
+            <div class="answer-reveal-box" id="answer-reveal-box">
+                ANSWER: Sample Answer
+            </div>
+
+            <!-- Host Manual Overrides -->
+            <div class="host-action-bar">
+                <button class="btn-correct" id="btn-manual-correct">✓ Mark Correct</button>
+                <button class="btn-wrong" id="btn-manual-wrong">✗ Mark Incorrect</button>
+                <button class="btn-skip" id="btn-manual-skip">⏭ Skip Clue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vendor Libraries with CDN Fallbacks -->
+    <script src="vendor/qrcode.min.js"></script>
+    <script src="vendor/peerjs.min.js"></script>
+    <script src="vendor/confetti.min.js"></script>
+    <script>
+        // CDN Fallbacks if vendor files ever fail to load
+        if (typeof QRCode === 'undefined') {
+            document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"><\/script>');
+        }
+        if (typeof Peer === 'undefined') {
+            document.write('<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"><\/script>');
+        }
+        if (typeof confetti === 'undefined') {
+            document.write('<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"><\/script>');
+        }
+    </script>
+
+    <!-- Game Engine Scripts -->
+    <script src="js/audio.js"></script>
+    <script src="js/rate-limiter.js"></script>
+    <script src="js/trivia-data.js"></script>
+    <script src="js/trivia-scourer.js"></script>
+    <script src="js/fuzzy-matcher.js"></script>
+    <script src="js/peer-sync.js"></script>
+    <script src="js/host-app.js"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jeopardy Buzzer - Player Client</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔔</text></svg>">
+    <link rel="stylesheet" href="css/jeopardy.css">
+    <link rel="stylesheet" href="css/mobile.css">
+</head>
+<body class="mobile-view">
+
+    <div class="mobile-container">
+
+        <!-- Mobile Top Header -->
+        <header class="mobile-header">
+            <div class="mobile-team-info">
+                <span class="mobile-team-name" id="header-team-name">Connecting...</span>
+                <span style="font-size: 11px; color: #88bbff;" id="conn-status-badge">Connecting to Host...</span>
+            </div>
+            <div class="mobile-score" id="header-score">$0</div>
+        </header>
+
+        <!-- VIEW 1: REGISTRATION SCREEN -->
+        <section class="mobile-card" id="view-register">
+            <h2 style="font-family: var(--font-serif); color: var(--jeopardy-gold); font-size: 26px;">
+                JOIN JEOPARDY
+            </h2>
+            <div style="font-size: 14px; color: #ccd;" id="reg-room-display">Room: ...</div>
+            <div style="font-size: 14px; color: var(--jeopardy-gold);" id="reg-slot-display">Team Slot #1</div>
+
+            <div style="text-align: left;">
+                <label style="font-size: 12px; color: #aaa; margin-bottom: 6px; display: block;">TEAM NAME:</label>
+                <input type="text" class="mobile-input" id="input-team-name" placeholder="Enter Team Name" maxlength="24">
+            </div>
+
+            <button class="gold-btn" id="btn-join-game" style="width: 100%; padding: 14px;">
+                JOIN GAME & ACTIVATE BUZZER
+            </button>
+        </section>
+
+        <!-- VIEW 2: GAMEPLAY & BUZZER SCREEN -->
+        <section class="buzzer-wrapper" id="view-buzzer" style="display: none;">
+
+            <!-- Tile Choice Drawer (Shown ONLY when it's this team's turn) -->
+            <div class="mobile-picker-view" id="mobile-picker-modal">
+                <div class="picker-title">⭐ YOUR TURN! PICK A CLUE:</div>
+                <div class="mobile-tiles-grid" id="picker-tiles-grid"></div>
+            </div>
+
+            <!-- Giant Buzzer Button -->
+            <button class="big-buzzer-btn" id="big-buzzer-btn" disabled>
+                WAIT
+            </button>
+
+            <!-- Status text -->
+            <div class="buzzer-status-text" id="buzzer-status-text">
+                Waiting for host to start game...
+            </div>
+
+            <!-- Answer Submission Drawer (Shown when this team buzzed in) -->
+            <div class="mobile-answer-view" id="mobile-answer-modal">
+                <div style="font-family: var(--font-serif); font-size: 22px; color: var(--jeopardy-gold); font-weight: bold; text-align: center;">
+                    🔔 YOU BUZZED IN!
+                </div>
+                <div style="font-size: 13px; color: #fff; text-align: center;">
+                    Answer out loud and type it below:
+                </div>
+                <div class="answer-timer-num" id="answer-countdown-num">15s</div>
+
+                <input type="text" class="mobile-input" id="input-player-answer" placeholder="What is / Who is..." autocomplete="off">
+
+                <button class="gold-btn" id="btn-submit-answer" style="padding: 12px;">
+                    SUBMIT ANSWER
+                </button>
+            </div>
+
+        </section>
+
+    </div>
+
+    <!-- Vendor Libraries -->
+    <script src="vendor/peerjs.min.js"></script>
+    <script>
+        if (typeof Peer === 'undefined') {
+            document.write('<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"><\/script>');
+        }
+    </script>
+
+    <!-- Client Scripts -->
+    <script src="js/fuzzy-matcher.js"></script>
+    <script src="js/peer-sync.js"></script>
+    <script src="js/client-app.js"></script>
+</body>
+</html>
