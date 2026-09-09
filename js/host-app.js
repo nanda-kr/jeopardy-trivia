@@ -89,7 +89,10 @@ class JeopardyHostApp {
             answerRevealBox: document.getElementById('answer-reveal-box'),
             btnManualCorrect: document.getElementById('btn-manual-correct'),
             btnManualWrong: document.getElementById('btn-manual-wrong'),
-            btnManualSkip: document.getElementById('btn-manual-skip')
+            btnManualSkip: document.getElementById('btn-manual-skip'),
+            hostActionBar: document.getElementById('host-action-bar'),
+            dismissActionBar: document.getElementById('dismiss-action-bar'),
+            btnDismissClue: document.getElementById('btn-dismiss-clue')
         };
 
         if (this.elements.roomBadge) {
@@ -149,6 +152,23 @@ class JeopardyHostApp {
 
         this.elements.btnManualSkip.addEventListener('click', () => {
             this.skipCurrentClue();
+        });
+
+        // Dismiss Clue button
+        if (this.elements.btnDismissClue) {
+            this.elements.btnDismissClue.addEventListener('click', () => {
+                this.closeClueAndReturnToBoard();
+            });
+        }
+
+        // Space/Enter/Escape shortcut to dismiss revealed tile
+        window.addEventListener('keydown', (e) => {
+            if ((e.code === 'Space' || e.code === 'Enter' || e.code === 'Escape') &&
+                this.elements.dismissActionBar &&
+                this.elements.dismissActionBar.style.display === 'flex') {
+                e.preventDefault();
+                this.closeClueAndReturnToBoard();
+            }
         });
     }
 
@@ -514,6 +534,8 @@ class JeopardyHostApp {
         this.elements.clueText.textContent = foundTile.clue;
         this.elements.clueSource.textContent = foundTile.source || 'Wikipedia Fact Archive';
         this.elements.answerRevealBox.style.display = 'none';
+        if (this.elements.dismissActionBar) this.elements.dismissActionBar.style.display = 'none';
+        if (this.elements.hostActionBar) this.elements.hostActionBar.style.display = 'flex';
 
         // Show Modal
         this.elements.clueCard.className = 'clue-card';
@@ -674,9 +696,8 @@ class JeopardyHostApp {
                 this.activeTurnTeamId = team.id;
             }
 
-            setTimeout(() => {
-                this.closeClueAndReturnToBoard();
-            }, 3200);
+            // Tile stays in place until dismissed
+            this.showDismissAction();
 
         } else {
             // INCORRECT!
@@ -747,9 +768,15 @@ class JeopardyHostApp {
         // Rotate turn to next team
         this.rotateTurnToNextTeam();
 
-        setTimeout(() => {
-            this.closeClueAndReturnToBoard();
-        }, 3000);
+        // Tile stays in place until dismissed
+        this.showDismissAction();
+    }
+
+    showDismissAction() {
+        if (this.elements.hostActionBar) this.elements.hostActionBar.style.display = 'none';
+        if (this.elements.buzzerStatusBanner) this.elements.buzzerStatusBanner.style.display = 'none';
+        if (this.elements.clueTimerBar) this.elements.clueTimerBar.style.width = '0%';
+        if (this.elements.dismissActionBar) this.elements.dismissActionBar.style.display = 'flex';
     }
 
     rotateTurnToNextTeam() {
