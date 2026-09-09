@@ -7,11 +7,19 @@
     "start": "node server.js",
     "test": "node test/test-engine.js"
   },
-  "keywords": ["jeopardy", "trivia", "webrtc", "quiz-game", "wikipedia", "buzzer"],
+  "keywords": [
+    "jeopardy",
+    "trivia",
+    "webrtc",
+    "quiz-game",
+    "wikipedia",
+    "buzzer"
+  ],
   "author": "nanda-kr",
   "license": "MIT",
   "dependencies": {
     "express": "^4.21.2",
+    "mqtt": "^5.15.2",
     "socket.io": "^4.8.1"
   }
 }

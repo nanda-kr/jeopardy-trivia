@@ -80,8 +80,12 @@
     </div>
 
     <!-- Vendor Libraries -->
+    <script src="vendor/mqtt.min.js"></script>
     <script src="vendor/peerjs.min.js"></script>
     <script>
+        if (typeof mqtt === 'undefined') {
+            document.write('<script src="https://unpkg.com/mqtt@5.10.1/dist/mqtt.min.js"><\/script>');
+        }
         if (typeof Peer === 'undefined') {
             document.write('<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"><\/script>');
         }
