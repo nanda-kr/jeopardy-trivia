@@ -1,8 +1,8 @@
 /**
- * Jeopardy Studio - Mobile Phone Client Controller
+ * Jeoparty Studio - Mobile Phone Client Controller
  */
 
-class JeopardyClientApp {
+class JeopartyClientApp {
     constructor() {
         this.peerSync = null;
         this.roomId = null;
@@ -27,7 +27,7 @@ class JeopardyClientApp {
 
     parseQueryParams() {
         const params = new URLSearchParams(window.location.search);
-        this.roomId = params.get('room') || 'JEP-1000';
+        this.roomId = params.get('room') || 'FRV-1000';
         this.slot = parseInt(params.get('slot') || '1', 10);
         this.teamId = `team_${this.slot}`;
         this.teamName = `Team ${this.slot}`;
@@ -108,7 +108,7 @@ class JeopardyClientApp {
     async initConnection() {
         const hostPeerId = `host-${this.roomId.toLowerCase().replace(/[^a-z0-9]/g, '')}`;
 
-        this.peerSync = new JeopardyPeerSync(false, {
+        this.peerSync = new JeopartyPeerSync(false, {
             roomId: this.roomId,
             teamId: this.teamId,
             slot: this.slot,
@@ -345,5 +345,5 @@ class JeopardyClientApp {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    window.clientApp = new JeopardyClientApp();
+    window.clientApp = new JeopartyClientApp();
 });

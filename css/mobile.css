@@ -28,7 +28,7 @@ body.mobile-view {
 /* Mobile Header */
 .mobile-header {
     background: rgba(0, 0, 40, 0.9);
-    border: 2px solid var(--jeopardy-gold);
+    border: 2px solid var(--jeoparty-gold);
     border-radius: 10px;
     padding: 12px 16px;
     display: flex;
@@ -45,7 +45,7 @@ body.mobile-view {
 .mobile-team-name {
     font-size: 18px;
     font-weight: 900;
-    color: var(--jeopardy-gold);
+    color: var(--jeoparty-gold);
 }
 
 .mobile-score {
@@ -58,7 +58,7 @@ body.mobile-view {
 /* Registration Card on Mobile */
 .mobile-card {
     background: rgba(0, 15, 60, 0.95);
-    border: 2px solid var(--jeopardy-gold);
+    border: 2px solid var(--jeoparty-gold);
     border-radius: 12px;
     padding: 24px;
     text-align: center;
@@ -70,7 +70,7 @@ body.mobile-view {
 
 .mobile-input {
     background: #000a30;
-    border: 2px solid var(--jeopardy-gold);
+    border: 2px solid var(--jeoparty-gold);
     color: #fff;
     padding: 14px;
     font-size: 18px;
@@ -149,14 +149,14 @@ body.mobile-view {
     font-size: 18px;
     font-weight: bold;
     text-align: center;
-    color: var(--jeopardy-gold);
+    color: var(--jeoparty-gold);
     min-height: 28px;
 }
 
 /* Category & Tile Picker Modal on Mobile (When it is this team's turn) */
 .mobile-picker-view {
     background: rgba(0, 15, 60, 0.98);
-    border: 2px solid var(--jeopardy-gold);
+    border: 2px solid var(--jeoparty-gold);
     border-radius: 12px;
     padding: 16px;
     display: none;
@@ -173,7 +173,7 @@ body.mobile-view {
 .picker-title {
     font-family: var(--font-serif);
     font-size: 20px;
-    color: var(--jeopardy-gold);
+    color: var(--jeoparty-gold);
     text-align: center;
     font-weight: bold;
 }
@@ -185,8 +185,8 @@ body.mobile-view {
 }
 
 .mobile-tile-choice {
-    background: var(--jeopardy-blue);
-    border: 1px solid var(--jeopardy-gold);
+    background: var(--jeoparty-blue);
+    border: 1px solid var(--jeoparty-gold);
     border-radius: 6px;
     padding: 12px 8px;
     text-align: center;
@@ -211,13 +211,13 @@ body.mobile-view {
     font-family: var(--font-serif);
     font-size: 20px;
     font-weight: 900;
-    color: var(--jeopardy-gold);
+    color: var(--jeoparty-gold);
 }
 
 /* Answer Submission View on Mobile */
 .mobile-answer-view {
     background: rgba(0, 30, 80, 0.98);
-    border: 3px solid var(--jeopardy-gold);
+    border: 3px solid var(--jeoparty-gold);
     border-radius: 12px;
     padding: 20px;
     display: none;

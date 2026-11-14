@@ -1,4 +1,4 @@
-name: Deploy Jeopardy Trivia Studio to GitHub Pages
+name: Deploy Jeoparty Trivia Studio to GitHub Pages
 
 on:
   push:

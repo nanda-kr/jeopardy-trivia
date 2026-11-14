@@ -1,8 +1,8 @@
 /**
- * Jeopardy Studio - Host / Quiz Master Application Logic
+ * Jeoparty Studio - Host / Quiz Master Application Logic
  */
 
-class JeopardyHostApp {
+class JeopartyHostApp {
     constructor() {
         this.limiter = new ExponentialBackoffLimiter({
             baseDelayMs: 250,
@@ -16,7 +16,7 @@ class JeopardyHostApp {
         this.peerSync = null;
 
         // Game State
-        this.roomId = 'JEP-' + Math.floor(1000 + Math.random() * 9000);
+        this.roomId = 'FRV-' + Math.floor(1000 + Math.random() * 9000);
         this.targetTeamCount = 3;
         this.teams = []; // [{ id, name, slot, color, score, connected, peerId }]
         this.selectedCategories = [];
@@ -73,7 +73,7 @@ class JeopardyHostApp {
             generationProgressText: document.getElementById('generation-progress-text'),
 
             // Board Screen
-            jeopardyBoard: document.getElementById('jeopardy-board'),
+            jeopartyBoard: document.getElementById('jeoparty-board'),
             turnAnnouncement: document.getElementById('turn-announcement-text'),
             scoreboardFooter: document.getElementById('scoreboard-footer'),
 
@@ -204,7 +204,7 @@ class JeopardyHostApp {
         this.teams = [];
 
         // Initialize PeerJS Host
-        this.peerSync = new JeopardyPeerSync(true, {
+        this.peerSync = new JeopartyPeerSync(true, {
             roomId: this.roomId,
             onConnectionStatusChange: (ok, label) => {
                 console.log(`[Host Network Status] ${label}`);
@@ -373,7 +373,7 @@ class JeopardyHostApp {
 
     renderCategoryDropdowns() {
         this.elements.catGrid.innerHTML = '';
-        const presets = JEOPARDY_PRESET_CATEGORIES;
+        const presets = JEOPARTY_PRESET_CATEGORIES;
 
         // Default recommended categories
         const defaults = ['science', 'movies', 'geography', 'history', 'technology', 'random'];
@@ -414,7 +414,7 @@ class JeopardyHostApp {
             });
 
             setTimeout(() => {
-                this.startJeopardyGame();
+                this.startJeopartyGame();
             }, 800);
         } catch (e) {
             console.error('Board generation error:', e);
@@ -423,9 +423,9 @@ class JeopardyHostApp {
     }
 
     /* -------------------------------------------------------------
-     * SCREEN 4: JEOPARDY BOARD & GAMEPLAY
+     * SCREEN 4: JEOPARTY BOARD & GAMEPLAY
      * ----------------------------------------------------------- */
-    startJeopardyGame() {
+    startJeopartyGame() {
         this.switchScreen('Board');
         this.renderBoard();
         this.renderScoreboard();
@@ -439,14 +439,14 @@ class JeopardyHostApp {
     }
 
     renderBoard() {
-        this.elements.jeopardyBoard.innerHTML = '';
+        this.elements.jeopartyBoard.innerHTML = '';
 
         // Top Header Row: 6 Categories
         this.board.forEach(col => {
             const headerCell = document.createElement('div');
             headerCell.className = 'board-header';
             headerCell.innerHTML = `<span>${col.icon} ${col.title}</span>`;
-            this.elements.jeopardyBoard.appendChild(headerCell);
+            this.elements.jeopartyBoard.appendChild(headerCell);
         });
 
         // 5 Rows of Tiles ($100 to $500)
@@ -470,7 +470,7 @@ class JeopardyHostApp {
                     }
                 });
 
-                this.elements.jeopardyBoard.appendChild(tileCell);
+                this.elements.jeopartyBoard.appendChild(tileCell);
             }
         }
     }
@@ -641,7 +641,7 @@ class JeopardyHostApp {
     evaluateSubmittedAnswer(userAnswer) {
         clearInterval(this.answerTimer);
 
-        const evaluation = JeopardyMatcher.evaluate(
+        const evaluation = JeopartyMatcher.evaluate(
             userAnswer,
             this.activeTile.answer,
             this.activeTile.accepted,
@@ -845,5 +845,5 @@ class JeopardyHostApp {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    window.hostApp = new JeopardyHostApp();
+    window.hostApp = new JeopartyHostApp();
 });

@@ -1,10 +1,10 @@
 /**
- * Web Audio API Sound Effects Synthesizer for Jeopardy
+ * Web Audio API Sound Effects Synthesizer for Jeoparty
  * Generates all authentic game sounds purely via Web Audio API oscillators and filters.
  * Requires zero external mp3 files and zero network latency.
  */
 
-class JeopardyAudio {
+class JeopartyAudio {
     constructor() {
         this.ctx = null;
         this.thinkOscillators = [];
@@ -30,7 +30,7 @@ class JeopardyAudio {
     }
 
     /**
-     * Classic Jeopardy Buzzer sound (when a player rings in)
+     * Classic Jeoparty Buzzer sound (when a player rings in)
      */
     playBuzzer() {
         if (this.isMuted) return;
@@ -207,4 +207,4 @@ class JeopardyAudio {
 }
 
 // Global instance
-window.soundFX = new JeopardyAudio();
+window.soundFX = new JeopartyAudio();

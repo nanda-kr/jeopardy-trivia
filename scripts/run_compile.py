@@ -80,18 +80,18 @@ def compile_database():
     ]
 
     js_content = f"""/**
- * Stored Database of Authentic Jeopardy Categories & 2,000 Verified Clues
+ * Stored Database of Authentic Jeoparty Categories & 2,000 Verified Clues
  * Sourced directly from reliable encyclopedic domains: Wikipedia, IMDb, Wikidata.
  * Contains exactly 200 questions per category across 10 categories,
  * eliminating the need for expensive live API calls during gameplay.
  */
 
-const JEOPARDY_PRESET_CATEGORIES = {json.dumps(categories_meta, indent=4, ensure_ascii=False)};
+const JEOPARTY_PRESET_CATEGORIES = {json.dumps(categories_meta, indent=4, ensure_ascii=False)};
 
 const CURATED_FACTS_DATABASE = {json.dumps(database, indent=4, ensure_ascii=False)};
 
 if (typeof module !== 'undefined' && module.exports) {{
-    module.exports = {{ JEOPARDY_PRESET_CATEGORIES, CURATED_FACTS_DATABASE }};
+    module.exports = {{ JEOPARTY_PRESET_CATEGORIES, CURATED_FACTS_DATABASE }};
 }}
 """
     with open("js/trivia-data.js", "w", encoding="utf-8") as f:

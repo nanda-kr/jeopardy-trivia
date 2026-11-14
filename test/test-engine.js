@@ -1,38 +1,38 @@
 /**
- * Automated Test Suite for Jeopardy Trivia Studio
+ * Automated Test Suite for Jeoparty Trivia Studio
  */
 
 const assert = require('assert');
 const { ExponentialBackoffLimiter } = require('../js/rate-limiter.js');
-const { JeopardyMatcher } = require('../js/fuzzy-matcher.js');
-const { CURATED_FACTS_DATABASE, JEOPARDY_PRESET_CATEGORIES } = require('../js/trivia-data.js');
+const { JeopartyMatcher } = require('../js/fuzzy-matcher.js');
+const { CURATED_FACTS_DATABASE, JEOPARTY_PRESET_CATEGORIES } = require('../js/trivia-data.js');
 
 global.CURATED_FACTS_DATABASE = CURATED_FACTS_DATABASE;
-global.JEOPARDY_PRESET_CATEGORIES = JEOPARDY_PRESET_CATEGORIES;
+global.JEOPARTY_PRESET_CATEGORIES = JEOPARTY_PRESET_CATEGORIES;
 const { TriviaScourer } = require('../js/trivia-scourer.js');
 
 async function runTests() {
-    console.log('🧪 Starting Jeopardy Studio Test Suite...\n');
+    console.log('🧪 Starting Jeoparty Studio Test Suite...\n');
 
     // 1. Fuzzy Matcher Tests
-    console.log('Test Group 1: Jeopardy Answer Matcher');
+    console.log('Test Group 1: Jeoparty Answer Matcher');
     {
-        const t1 = JeopardyMatcher.evaluate("What is Jupiter?", "Jupiter");
+        const t1 = JeopartyMatcher.evaluate("What is Jupiter?", "Jupiter");
         assert.strictEqual(t1.isCorrect, true, "Should match 'What is Jupiter?'");
 
-        const t2 = JeopardyMatcher.evaluate("who was Albert Einstein?", "Albert Einstein");
+        const t2 = JeopartyMatcher.evaluate("who was Albert Einstein?", "Albert Einstein");
         assert.strictEqual(t2.isCorrect, true, "Should match 'who was Albert Einstein?'");
 
-        const t3 = JeopardyMatcher.evaluate("Einstein", "Albert Einstein");
+        const t3 = JeopartyMatcher.evaluate("Einstein", "Albert Einstein");
         assert.strictEqual(t3.isCorrect, true, "Should accept last name for historic figures");
 
-        const t4 = JeopardyMatcher.evaluate("jupitar", "Jupiter");
+        const t4 = JeopartyMatcher.evaluate("jupitar", "Jupiter");
         assert.strictEqual(t4.isCorrect, true, "Should accept minor typo (close enough)");
 
-        const t5 = JeopardyMatcher.evaluate("The Pacific Ocean", "Pacific Ocean");
+        const t5 = JeopartyMatcher.evaluate("The Pacific Ocean", "Pacific Ocean");
         assert.strictEqual(t5.isCorrect, true, "Should ignore leading article 'The'");
 
-        const t6 = JeopardyMatcher.evaluate("Mars", "Jupiter");
+        const t6 = JeopartyMatcher.evaluate("Mars", "Jupiter");
         assert.strictEqual(t6.isCorrect, false, "Should reject incorrect answer");
 
         console.log('  ✓ All 6 Answer Matcher assertions passed.');

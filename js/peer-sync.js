@@ -1,12 +1,12 @@
 /**
- * Real-time Multi-Device Synchronization Engine for Jeopardy Trivia Studio
+ * Real-time Multi-Device Synchronization Engine for Jeoparty Trivia Studio
  * Supports:
  * 1. Cloud WebSocket Relay (MQTT over TLS WSS) - 100% reliable across cellular & all Wi-Fi networks.
  * 2. BroadcastChannel - zero-latency instant loopback for tabs on the same computer.
  * 3. PeerJS WebRTC - optional direct P2P data channels.
  */
 
-class JeopardyPeerSync {
+class JeopartyPeerSync {
     constructor(isHost = false, options = {}) {
         this.isHost = isHost;
         this.roomId = options.roomId || this.generateRoomId();
@@ -25,14 +25,14 @@ class JeopardyPeerSync {
             'wss://broker.hivemq.com:8884/mqtt'
         ];
         this.currentBrokerIdx = 0;
-        this.topicHost = `jeopardy/v1/${this.roomId}/to_host`;
-        this.topicClients = `jeopardy/v1/${this.roomId}/to_clients`;
+        this.topicHost = `jeoparty/v1/${this.roomId}/to_host`;
+        this.topicClients = `jeoparty/v1/${this.roomId}/to_clients`;
 
         // Local multi-tab fallback
         this.broadcastChannel = null;
         if (typeof BroadcastChannel !== 'undefined') {
             try {
-                this.broadcastChannel = new BroadcastChannel(`jeopardy_room_${this.roomId}`);
+                this.broadcastChannel = new BroadcastChannel(`jeoparty_room_${this.roomId}`);
                 this.broadcastChannel.onmessage = (event) => {
                     this.handleIncomingPacket(event.data, 'broadcast');
                 };
@@ -48,7 +48,7 @@ class JeopardyPeerSync {
         for (let i = 0; i < 5; i++) {
             id += chars.charAt(Math.floor(Math.random() * chars.length));
         }
-        return `JEP-${id}`;
+        return `FRV-${id}`;
     }
 
     on(msgType, callback) {
@@ -244,5 +244,5 @@ class JeopardyPeerSync {
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { JeopardyPeerSync };
+    module.exports = { JeopartyPeerSync };
 }

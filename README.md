@@ -1,14 +1,14 @@
-# 🏆 Jeopardy! Trivia Studio
+# 🏆 Jeoparty! Trivia Studio
 
-An authentic, interactive, real-time multiplayer Jeopardy-style trivia game with a Quiz Master host screen and mobile phone client buzzers. Built with vanilla web standards, WebRTC peer-to-peer networking (PeerJS), live Wikipedia/IMDb scouring with exponential backoff rate limiting, and pure Web Audio API sound effects.
+An authentic, interactive, real-time multiplayer Jeoparty-style trivia game with a Quiz Master host screen and mobile phone client buzzers. Built with vanilla web standards, WebRTC peer-to-peer networking (PeerJS), live Wikipedia/IMDb scouring with exponential backoff rate limiting, and pure Web Audio API sound effects.
 
-**Live Deployment**: [https://nanda-kr.github.io/jeopardy-trivia/](https://nanda-kr.github.io/jeopardy-trivia/)
+**Live Deployment**: [https://nanda-kr.github.io/jeoparty-trivia/](https://nanda-kr.github.io/jeoparty-trivia/)
 
 ---
 
 ## 🌟 Key Features
 
-1. **Authentic Jeopardy Aesthetic**:
+1. **Authentic Jeoparty Aesthetic**:
    - Iconic deep blue grid with gold-trimmed headers (`#060CE9`, `#FFCC00`).
    - Classic serif typography with high-contrast text and dollar values ($100, $200, $300, $400, $500).
    - Animated visual feedback: glowing green pulse on correct answer, shaking red animation on incorrect buzzes.
@@ -32,7 +32,7 @@ An authentic, interactive, real-time multiplayer Jeopardy-style trivia game with
      - Atomic first-to-buzz lockout system ensures zero race conditions.
      - The buzzing team answers out loud, types their answer on their phone, and submits.
    - **Smart Answer Evaluation**:
-     - Normalized Levenshtein distance and token parsing automatically handles Jeopardy phrasing (*"What is..."*, *"Who was..."*), articles (*"the"*, *"a"*), and minor spelling variations.
+     - Normalized Levenshtein distance and token parsing automatically handles Jeoparty phrasing (*"What is..."*, *"Who was..."*), articles (*"the"*, *"a"*), and minor spelling variations.
      - If correct or close enough: tile glows green, official answer is revealed, points are awarded, and that team retains board control.
      - If incorrect: tile shakes in red, points are deducted, and remaining teams can buzz in.
 
@@ -41,16 +41,16 @@ An authentic, interactive, real-time multiplayer Jeopardy-style trivia game with
 ## 🕹️ Quick Start & Local Run
 
 ### Option 1: Live via GitHub Pages
-Visit [https://nanda-kr.github.io/jeopardy-trivia/](https://nanda-kr.github.io/jeopardy-trivia/) directly in any browser.
+Visit [https://nanda-kr.github.io/jeoparty-trivia/](https://nanda-kr.github.io/jeoparty-trivia/) directly in any browser.
 
 ### Option 2: Local Node.js Server
 ```bash
-git clone https://github.com/nanda-kr/jeopardy-trivia.git
-cd jeopardy-trivia
+git clone https://github.com/nanda-kr/jeoparty-trivia.git
+cd jeoparty-trivia
 npm start
 ```
 - Open `http://localhost:3000` for the Quiz Master Screen.
-- Open `http://localhost:3000/client.html?room=JEP-1000&slot=1` for Mobile Clients.
+- Open `http://localhost:3000/client.html?room=FRV-1000&slot=1` for Mobile Clients.
 
 ### Option 3: Static Python Server
 ```bash
@@ -72,18 +72,18 @@ npm test
 ## 🛠️ Architecture
 
 ```
-jeopardy-trivia/
+jeoparty-trivia/
 ├── index.html                 # Main Host / Quiz Master View
 ├── client.html                # Mobile Buzzer Client View
 ├── css/
-│   ├── jeopardy.css           # Core styling, grid layout & animations
+│   ├── jeoparty.css           # Core styling, grid layout & animations
 │   └── mobile.css             # Mobile buzzer & touch interface styles
 ├── js/
 │   ├── audio.js               # Web Audio API sound synthesizer
 │   ├── rate-limiter.js        # Exponential backoff & TPS rate limiter
 │   ├── trivia-scourer.js      # Wikipedia REST API scraper & clue builder
-│   ├── trivia-data.js         # Curated authentic Jeopardy clue bank
-│   ├── fuzzy-matcher.js       # Levenshtein distance & Jeopardy phrase parser
+│   ├── trivia-data.js         # Curated authentic Jeoparty clue bank
+│   ├── fuzzy-matcher.js       # Levenshtein distance & Jeoparty phrase parser
 │   ├── peer-sync.js           # WebRTC DataChannel / BroadcastChannel sync
 │   ├── host-app.js            # Host controller & game state machine
 │   └── client-app.js          # Mobile client controller

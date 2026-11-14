@@ -1,14 +1,14 @@
 {
-  "name": "jeopardy-trivia",
+  "name": "jeoparty-trivia",
   "version": "1.0.0",
-  "description": "Jeopardy-Style Trivia Web App - Real-time multiplayer with mobile buzzers, Wikipedia/IMDb scouring & rate limiting",
+  "description": "Jeoparty-Style Trivia Web App - Real-time multiplayer with mobile buzzers, Wikipedia/IMDb scouring & rate limiting",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "test": "node test/test-engine.js"
   },
   "keywords": [
-    "jeopardy",
+    "jeoparty",
     "trivia",
     "webrtc",
     "quiz-game",

@@ -1,12 +1,12 @@
 /**
- * Jeopardy Answer Evaluator & Fuzzy Matcher
- * Parses Jeopardy-style phrasing ("What is...", "Who was..."), removes articles,
+ * Jeoparty Answer Evaluator & Fuzzy Matcher
+ * Parses Jeoparty-style phrasing ("What is...", "Who was..."), removes articles,
  * and uses Levenshtein similarity + token matching to judge if an answer is correct or "close enough".
  */
 
-class JeopardyMatcher {
+class JeopartyMatcher {
     /**
-     * Normalize string by stripping Jeopardy prefixes, articles, and punctuation
+     * Normalize string by stripping Jeoparty prefixes, articles, and punctuation
      */
     static normalize(text) {
         if (!text || typeof text !== 'string') return '';
@@ -16,8 +16,8 @@ class JeopardyMatcher {
         // Strip HTML tags if any
         s = s.replace(/<\/?[^>]+(>|$)/g, '');
 
-        // Remove Jeopardy phrasing prefixes
-        const jeopardyPrefixes = [
+        // Remove Jeoparty phrasing prefixes
+        const jeopartyPrefixes = [
             /^what\s+is\s+(the\s+|an?\s+)?/,
             /^what\s+are\s+(the\s+)?/,
             /^what\s+was\s+(the\s+|an?\s+)?/,
@@ -32,7 +32,7 @@ class JeopardyMatcher {
             /^it's\s+(the\s+|an?\s+)?/
         ];
 
-        for (const prefix of jeopardyPrefixes) {
+        for (const prefix of jeopartyPrefixes) {
             s = s.replace(prefix, '');
         }
 
@@ -185,5 +185,5 @@ class JeopardyMatcher {
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { JeopardyMatcher };
+    module.exports = { JeopartyMatcher };
 }

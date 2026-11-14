@@ -33,12 +33,12 @@ class TriviaScourer {
      * Get the active stored question bank
      */
     getBank() {
-        if (typeof JEOPARDY_STORED_QUESTION_BANK !== 'undefined') {
-            return JEOPARDY_STORED_QUESTION_BANK;
+        if (typeof JEOPARTY_STORED_QUESTION_BANK !== 'undefined') {
+            return JEOPARTY_STORED_QUESTION_BANK;
         }
         if (typeof require !== 'undefined') {
             try {
-                return require('./trivia-bank.js').JEOPARDY_STORED_QUESTION_BANK;
+                return require('./trivia-bank.js').JEOPARTY_STORED_QUESTION_BANK;
             } catch (e) {}
         }
         if (typeof CURATED_FACTS_DATABASE !== 'undefined') {
@@ -57,7 +57,7 @@ class TriviaScourer {
         const availableCategoryKeys = Object.keys(bank);
         const finalCategories = [];
 
-        onProgress(15, "Selecting Jeopardy categories from stored library...");
+        onProgress(15, "Selecting Jeoparty categories from stored library...");
 
         // Resolve "random" categories
         const pool = [...availableCategoryKeys].sort(() => 0.5 - Math.random());
@@ -89,9 +89,9 @@ class TriviaScourer {
             }
         }
 
-        const presets = typeof JEOPARDY_PRESET_CATEGORIES !== 'undefined'
-            ? JEOPARDY_PRESET_CATEGORIES
-            : (typeof require !== 'undefined' ? require('./trivia-data.js').JEOPARDY_PRESET_CATEGORIES : []);
+        const presets = typeof JEOPARTY_PRESET_CATEGORIES !== 'undefined'
+            ? JEOPARTY_PRESET_CATEGORIES
+            : (typeof require !== 'undefined' ? require('./trivia-data.js').JEOPARTY_PRESET_CATEGORIES : []);
 
         const boardColumns = [];
         const totalItems = finalCategories.length * 5;
@@ -122,8 +122,8 @@ class TriviaScourer {
                     selectedFact = {
                         value: val,
                         clue: `Trivia clue for ${catPreset.name} at level $${val}.`,
-                        answer: "Jeopardy",
-                        accepted: ["jeopardy"],
+                        answer: "Jeoparty",
+                        accepted: ["jeoparty"],
                         source: "Wikipedia Fact Archive"
                     };
                 }
@@ -154,7 +154,7 @@ class TriviaScourer {
             });
         }
 
-        onProgress(100, "Jeopardy board loaded instantly from stored 2,000-question library!");
+        onProgress(100, "Jeoparty board loaded instantly from stored 2,000-question library!");
         return boardColumns;
     }
 }

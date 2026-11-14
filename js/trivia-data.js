@@ -1,11 +1,11 @@
 /**
- * Stored Database of Authentic Jeopardy Categories & 2,000 Verified Clues
+ * Stored Database of Authentic Jeoparty Categories & 2,000 Verified Clues
  * Sourced directly from reliable encyclopedic domains: Wikipedia, IMDb, Wikidata.
  * Contains exactly 200 questions per category across 10 categories,
  * eliminating the need for expensive live API calls during gameplay.
  */
 
-const JEOPARDY_PRESET_CATEGORIES = [
+const JEOPARTY_PRESET_CATEGORIES = [
     {
         "id": "random",
         "name": "🎲 Random Mix",
@@ -18409,5 +18409,5 @@ const CURATED_FACTS_DATABASE = {
 };
 
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { JEOPARDY_PRESET_CATEGORIES, CURATED_FACTS_DATABASE };
+    module.exports = { JEOPARTY_PRESET_CATEGORIES, CURATED_FACTS_DATABASE };
 }

@@ -1,5 +1,5 @@
 /**
- * Jeopardy Studio - Optional Standalone Local Server
+ * Jeoparty Studio - Optional Standalone Local Server
  * Provides HTTP static file serving and WebSocket real-time relay for local LAN play.
  */
 
@@ -47,7 +47,7 @@ const server = http.createServer((req, res) => {
 
 server.listen(PORT, () => {
     console.log(`\n==============================================`);
-    console.log(`🏆 JEOPARDY! TRIVIA STUDIO SERVER RUNNING`);
+    console.log(`🏆 JEOPARTY! TRIVIA STUDIO SERVER RUNNING`);
     console.log(`- Host Screen:   http://localhost:${PORT}`);
     console.log(`- Mobile Client: http://localhost:${PORT}/client.html`);
     console.log(`==============================================\n`);
